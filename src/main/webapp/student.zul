@@ -1,0 +1,66 @@
+<window id="win_student" title="STUDENT" border="normal"
+	viewModel="@id('vm') @init('com.ViewModel.StudentViewModel')">
+	<listbox width="1200px" style="margin:0 auto"
+		model="@bind(vm.students)" selectedItem="@bind(vm.selectedStudent)" children=""
+		emptyMessage="No car found in the result" rows="5">
+		<listhead sizable="true">
+			<listheader label="id" />
+			<listheader label="name" />
+			<listheader label="email" />
+			<listheader label="address" width="20%" />
+		</listhead>
+		<template name="model" var="fStudent">
+			<listitem>
+				<listcell label="@load(fStudent.id)"></listcell>
+				<listcell label="@load(fStudent.fullName)"></listcell>
+				<listcell label="@load(fStudent.email)"></listcell>
+				<listcell label="@load(fStudent.address)"></listcell>
+			</listitem>
+		</template>
+	</listbox>
+	<grid height="350px" width="1200px" style="margin:0 auto"
+		form="@id('fStudent') @load(vm.selectedStudent) @save(vm.selectedStudent, before='update') @save(vm.newStudent, before='add')">
+		<columns>
+			<column label="Type" width="30%" />
+			<column label="Content" width="30%" />
+		</columns>
+
+		<rows>
+			<row>
+				<label>Name</label>
+				<textbox width="100%" value="@bind(fStudent.fullName)" />
+			</row>
+			<row>
+				<label>Email</label>
+				<textbox width="100%" value="@bind(fStudent.email)" />
+			</row>
+			<row>
+				<label>Address</label>
+				<textbox width="100%" value="@bind(fStudent.address)" />
+			</row>
+			<row>
+				<label></label>
+				<button id="save" label="SAVE"
+					onClick="@command('add')">
+				</button>
+			</row>
+			<row>
+				<label></label>
+				<button id="update" label="UPDATE"
+					onClick="@command('update')">
+				</button>
+				
+			</row>
+			<row>
+				<label></label>
+				<button id="delete" label="delete"
+					onClick="@command('delete')">
+					<attribute name="onClick"><![CDATA[
+						Messagebox.show("Question is pressed. Are you sure?", "Question", Messagebox.OK | Messagebox.CANCEL,
+								Messagebox.QUESTION);
+					]]></attribute>
+				</button>
+			</row>
+		</rows>
+	</grid>
+</window>
