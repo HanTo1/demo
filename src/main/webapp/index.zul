@@ -4,6 +4,6 @@
 		validationMessages="@id('vmsgs')">
 		<hlayout>count: <label value="@load(vm.count)" /></hlayout>
 		<button label="add" onClick="@command('cmd')"/>
-		<a href="student.zul">student</a>
+		<a href="student.zul">students</a>
 	</window>
 </zk>
